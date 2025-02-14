@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% load static %}
+    <link rel="stylesheet" href="../static/css/style.css">
+    <style>
+        /* {% static '/css/style.css' %} */
+    
+    .reg_btn{
+        /* width: 30%; */
+        /* background-color:red; */
+        color: whitesmoke;
+        text-decoration: none;
+        padding: 14px 3px;
+        border: none;
+        border-radius: 5px;
+        margin-left: 2%;
+    }
+    .reg_btn:hover{
+        background-color: rgb(6, 69, 66);
+        color: whitesmoke;
+    }
+    
+    </style>
+</head>
+<body style="height:100vh; background-color:whitesmoke;display: flex;justify-content: center;align-items: center;height:100vh;">
+
+    {% if messages %}
+    {% for message in messages %}
+    <div class="alert alert-warning alert-dismissible">
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    
+    
+    <div class="login_div" style="height: 220px;background-color:rgb(46, 160, 154);max-width: 380px; width: 100%;padding: 80px;border-radius: 8px;">
+        <h2 class="login mb-4">Login</h2>
+        <form action="" method="post">
+            {% csrf_token %}
+            <p style="color: white;"><b>UserName : </b><input type="text" name="uname" placeholder="username"></p>
+            <p style="color: white;"><b>Password : </b><input type="password" name="password" placeholder="password"></p>
+            <input type="submit" value="Login">
+        </form>
+        <a href="register" class="btn reg_btn">Register</a>
+    </div>  
+</body>
+</html>

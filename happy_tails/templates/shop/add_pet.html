@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+    background-color:whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height:96vh;
+}
+.main_div{
+    max-width:400px ;
+    width: 100%;
+    padding:55px ;
+    background-color:rgb(46, 160, 154) ;
+    border-radius:8px ;
+}
+.add_pro{
+    text-align: center;
+    color: white;
+}
+input[type=text],select{
+    width:90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;  
+    border:none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    
+}
+input[type=number],select{
+    width:90%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;  
+    border:none;
+    border-radius: 4px;
+    box-sizing: border-box;
+    
+}
+input[type=submit],select{
+    width: 18%;
+    background-color:rgb(6, 69, 66);
+    color: white;
+    padding: 15px 5px;
+    border: none;
+    border-radius: 5px;
+    margin-left: 40%;
+    
+}
+input[type=submit]:hover{
+    background-color: rgb(8, 94, 90);
+    color: white;
+}
+    </style>
+</head>
+<body>
+
+
+    <div class="main_div">
+        <h2 class="add_pro fw-light">Add Pets</h2>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p><b>Pet id : </b><input type="text" name="pet_id" id="" placeholder="Enter pet id" class="p_id"></p>
+            <p><b>Pet name : </b><input type="text" name="pet_name" id="" placeholder="Enter pet name"></p>
+            <p><b>Pet Gender : </b><input type="text" name="pet_gender" id="" placeholder="Enter gender of pet"></p>
+            <p><b>Pet age : </b><input type="number" name="pet_age" id="" placeholder="Enter age"></p>
+            <p><b>Adoption fee : </b><input type="number" name="adoption_fee" id="" placeholder="Enter adoption fee"></p>
+            <p><b>Pet description : </b><input type="text" name="pet_description" id="" placeholder="Enter description"></p>
+            <p><b>Pet category : </b><input type="text" name="pet_category" id="" placeholder="Enter description"></p>
+
+            <p><b>Pet Image : </b><input type="file" name="pet_img" id=""></p>
+            <input type="submit" value="Add">
+        </form>
+    </div>
+
+</body>
+</html>
