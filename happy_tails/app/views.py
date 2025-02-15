@@ -52,20 +52,70 @@ def shop_home(req):
         return redirect(shop_login)
     
 
+# def add_pet(req):
+#     if req.method=='POST':
+#         id=req.POST['pet_id']
+#         name=req.POST['pet_name']
+#         gender=req.POST['pet_gender']
+#         age=req.POST['pet_age']
+#         adoption_fee=req.POST['adoption_fee']
+#         dis=req.POST['pet_description']
+#         file=req.FILES['pet_img']
+#         pet_category=req.POST['pet_category']
+#         data=Pets.objects.create(pet_id=id,pet_name=name,gender=gender,age=age,adoption_fee=adoption_fee,dis=dis,img=file,category=pet_category)
+#         data.save()
+#         return redirect(shop_home)
+#     pet=Pet_category.objects.all()
+#     return render(req,'shop/add_pet.html',{'pets': pet})
+
 def add_pet(req):
+    if req.method == 'POST':
+        id = req.POST['pet_id']
+        name = req.POST['pet_name']
+        gender = req.POST['pet_gender']
+        age = req.POST['pet_age']
+        adoption_fee = req.POST['adoption_fee']
+        dis = req.POST['pet_description']
+        file = req.FILES.get('pet_img')  # Ensure file upload works
+        pet_category_id = req.POST['pet_category']
+        
+        try:
+            pet_category = Pet_category.objects.get(id=pet_category_id)  # Ensure category exists
+            data = Pets.objects.create(
+                pet_id=id, 
+                pet_name=name, 
+                gender=gender, 
+                age=age, 
+                adoption_fee=adoption_fee, 
+                dis=dis, 
+                img=file, 
+                category=pet_category
+            )
+            data.save()
+            return redirect(shop_home)  # Redirect after successful submission
+        except Pet_category.DoesNotExist:
+            return render(req, 'shop/add_pet.html', {'error': 'Invalid category selected'})
+
+    pets = Pet_category.objects.all()
+    return render(req, 'shop/add_pet.html',{'pets':pets})
+
+
+def edit_pet(req,id):
+    pet=Pets.objects.get(pk=id)
     if req.method=='POST':
-        id=req.POST['pet_id']
+        e_id=req.POST['pet_id']
         name=req.POST['pet_name']
         gender=req.POST['pet_gender']
         age=req.POST['pet_age']
         adoption_fee=req.POST['adoption_fee']
         dis=req.POST['pet_description']
         file=req.FILES['pet_img']
-        pet_category=req.POST['pet_category']
-        data=Pets.objects.create(pet_id=id,pet_name=name,gender=gender,age=age,adoption_fee=adoption_fee,dis=dis,img=file,category=pet_category)
-        data.save()
+        if file:
+            Pets.objects.filter(pk=id).update(pet_id=e_id,pet_name=name,gender=gender,age=age,adoption_fee=adoption_fee,dis=dis,img=file,category=pet_category)
+        else:
+            Pets.objects.filter(pk=id).update(pet_id=e_id,pet_name=name,gender=gender,age=age,adoption_fee=adoption_fee,dis=dis,category=pet_category)
         return redirect(shop_home)
-    return render(req,'shop/add_pet.html')
+    return render(req,'shop/edit_pet.html',{'pets':pet})
 
 
 def dog_list(req,id):

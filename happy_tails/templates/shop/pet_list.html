@@ -1,84 +1,145 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }} - Pet List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .pet {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .pet img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            margin-right: 15px;
+        }
+        .pet-details {
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{ category.name }}</h1>
+        <p>{{ category.description }}</p>
+        <hr>
+        {% for pet in pet_details %}
+        <div class="pet">
+            <img src="{{ pet.img.url }}" alt="{{ pet.pet_name }}">
+            <div class="pet-details">
+                <h2>{{ pet.pet_name }}</h2>
+                <p><strong>Gender:</strong> {{ pet.gender }}</p>
+                <p><strong>Age:</strong> {{ pet.age }}</p>
+                <p><strong>Adoption Fee:</strong> ${{ pet.adoption_fee }}</p>
+                <p>{{ pet.dis }}</p>
+            </div>
+        </div>
+        {% empty %}
+        <p>No pets available in this category.</p>
+        {% endfor %}
+    </div>
+</body>
+</html> -->
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pet List</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-  
-  <style>
-    body {
-      background-color: #f4f4f9;
-    }
-    .pet-card {
-      margin-bottom: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    }
-    .pet-image {
-      border-radius: 8px 8px 0 0;
-      height: 200px;
-      object-fit: cover;
-    }
-    .pet-name {
-      font-size: 1.5rem;
-      font-weight: bold;
-      color: #343a40;
-    }
-    .pet-type {
-      font-size: 1.2rem;
-      color: #6c757d;
-    }
-    .pet-description {
-      font-size: 1rem;
-      color: #495057;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ category.name }} - Pet List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .pet {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #ddd;
+        }
+        .pet img {
+            width: 100px;
+            height: 100px;
+            border-radius: 10px;
+            margin-right: 15px;
+        }
+        .pet-details {
+            flex-grow: 1;
+        }
+        .buttons {
+            display: flex;
+            gap: 10px;
+        }
+        .btn {
+            padding: 8px 12px;
+            text-decoration: none;
+            color: white;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+        .edit-btn {
+            background-color: #4CAF50;
+        }
+        .delete-btn {
+            background-color: #f44336;
+        }
+    </style>
 </head>
 <body>
-
-  <div class="container my-5">
-    <h1 class="text-center mb-4">Pet List</h1>
-    
-    <div class="row">
-      <!-- Pet 1 -->
-      <div class="col-md-4">
-        <div class="card pet-card">
-          <img src="https://via.placeholder.com/300x200?text=Dog" class="card-img-top pet-image" alt="Dog">
-          <div class="card-body">
-            <h5 class="card-title pet-name">Rex</h5>
-            <p class="pet-type">Dog</p>
-            <p class="card-text pet-description">Rex is an energetic and playful dog who loves to run and fetch.</p>
-          </div>
+    <div class="container">
+        <h1>{{ category.name }}</h1>
+        <p>{{ category.description }}</p>
+        <hr>
+        {% for pet in pet_details %}
+        <div class="pet">
+            <img src="{{ pet.img.url }}" alt="{{ pet.pet_name }}">
+            <div class="pet-details">
+                <h2>{{ pet.pet_name }}</h2>
+                <p><strong>Gender:</strong> {{ pet.gender }}</p>
+                <p><strong>Age:</strong> {{ pet.age }}</p>
+                <p><strong>Adoption Fee:</strong> ${{ pet.adoption_fee }}</p>
+                <p>{{ pet.dis }}</p>
+                <div class="buttons">
+                    <a href="{% url 'edit_pet' pet.id %}" class="btn edit-btn">Edit</a>
+                    <a href="{% url 'delete_pet' pet.id %}" class="btn delete-btn">Delete</a>
+                </div>
+            </div>
         </div>
-      </div>
-      <!-- Pet 2 -->
-      <div class="col-md-4">
-        <div class="card pet-card">
-          <img src="https://via.placeholder.com/300x200?text=Cat" class="card-img-top pet-image" alt="Cat">
-          <div class="card-body">
-            <h5 class="card-title pet-name">Whiskers</h5>
-            <p class="pet-type">Cat</p>
-            <p class="card-text pet-description">Whiskers is a calm and independent cat who loves lounging in the sun.</p>
-          </div>
-        </div>
-      </div>
-      <!-- Pet 3 -->
-      <div class="col-md-4">
-        <div class="card pet-card">
-          <img src="https://via.placeholder.com/300x200?text=Rabbit" class="card-img-top pet-image" alt="Rabbit">
-          <div class="card-body">
-            <h5 class="card-title pet-name">Flopsy</h5>
-            <p class="pet-type">Rabbit</p>
-            <p class="card-text pet-description">Flopsy is a curious rabbit who loves hopping around the garden.</p>
-          </div>
-        </div>
-      </div>
+        {% empty %}
+        <p>No pets available in this category.</p>
+        {% endfor %}
     </div>
-  </div>
-
-  <!-- Bootstrap JS (Optional for interactivity) -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
