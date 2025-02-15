@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Pet</title>
+</head>
+<body>
+    <h2>Edit Pet Details</h2>
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label for="pet_id">Pet ID:</label>
+        <input type="text" id="pet_id" name="pet_id" value="{{ pet.pet_id }}" required><br>
+        
+        <label for="pet_name">Pet Name:</label>
+        <input type="text" id="pet_name" name="pet_name" value="{{ pet.pet_name }}" required><br>
+        
+        <label for="pet_gender">Gender:</label>
+        <input type="text" id="pet_gender" name="pet_gender" value="{{ pet.gender }}" required><br>
+        
+        <label for="pet_age">Age:</label>
+        <input type="text" id="pet_age" name="pet_age" value="{{ pet.age }}" required><br>
+        
+        <label for="adoption_fee">Adoption Fee:</label>
+        <input type="number" id="adoption_fee" name="adoption_fee" value="{{ pet.adoption_fee }}" required><br>
+        
+        <label for="pet_description">Description:</label>
+        <textarea id="pet_description" name="pet_description" required>{{ pet.dis }}</textarea><br>
+        
+        <label for="pet_img">Pet Image:</label>
+        <input type="file" id="pet_img" name="pet_img"><br>
+        {% if pet.img %}
+            <img src="{{ pet.img.url }}" alt="Current Image" width="100">
+        {% endif %}
+        <br>
+        
+        <label for="pet_category">Category:</label>
+        <select id="pet_category" name="pet_category" required>
+            {% for category in categories %}
+                <option value="{{ category.id }}" {% if category.id == pet.category.id %}selected{% endif %}>{{ category.name }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        
+        <button type="submit">Update Pet</button>
+    </form>
+</body>
+</html>
