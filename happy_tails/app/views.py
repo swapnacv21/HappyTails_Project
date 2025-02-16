@@ -86,3 +86,17 @@ def dog_list(req,id):
     pet_details = Pets.objects.filter(category=category)
     return render(req, 'shop/pet_list.html', {'category': category,'pet_details':pet_details})
 
+def register(req):
+    if req.method=='POST':
+        name=req.POST['name']
+        email=req.POST['email']
+        password=req.POST['password']
+        try:
+            data=User.objects.create_user(first_name=name,email=email,password=password,username=email)
+            data.save()
+            return redirect(shop_login)
+        except:
+            messages.warning(req,"Email Exists")
+            return redirect(register)
+    else:
+        return render(req,'user/register.html')
