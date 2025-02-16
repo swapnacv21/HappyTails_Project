@@ -36,15 +36,7 @@
             <img src="{{ pet.img.url }}" alt="Current Image" width="100">
         {% endif %}
         <br>
-        
-        <label for="pet_category">Category:</label>
-        <select id="pet_category" name="pet_category" required>
-            {% for category in categories %}
-                <option value="{{ category.id }}" {% if category.id == pet.category.id %}selected{% endif %}>{{ category.name }}</option>
-            {% endfor %}
-        </select>
-        <br>
-        
+                
         <button type="submit">Update Pet</button>
     </form>
 </body>

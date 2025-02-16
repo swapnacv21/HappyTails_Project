@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.contrib.auth import authenticate,login,logout
 from .models import *
 import os
@@ -58,7 +58,6 @@ def add_pet(req):
         dis = req.POST['pet_description']
         file = req.FILES.get('pet_img')  # Ensure file upload works
         pet_category_id = req.POST['pet_category']
-        
         try:
             pet_category = Pet_category.objects.get(id=pet_category_id)  # Ensure category exists
             data = Pets.objects.create(
@@ -78,6 +77,8 @@ def add_pet(req):
 
     pets = Pet_category.objects.all()
     return render(req, 'shop/add_pet.html',{'pets':pets})
+
+
 
 
 def dog_list(req,id):
