@@ -79,6 +79,31 @@ def add_pet(req):
     return render(req, 'shop/add_pet.html',{'pets':pets})
 
 
+def edit_pet(req,id):
+    pet=Pets.objects.get(pk=id)
+    if req.method=='POST':
+        e_id=req.POST['pet_id']
+        name=req.POST['pet_name']
+        gender=req.POST['pet_gender']
+        age=req.POST['pet_age']
+        adoption_fee=req.POST['adoption_fee']
+        dis=req.POST['pet_description']
+        file=req.FILES['pet_img']
+        if file:
+            Pets.objects.filter(pk=id).update(pet_id=e_id,pet_name=name,gender=gender,age=age,adoption_fee=adoption_fee,dis=dis,img=file)
+        else:
+            Pets.objects.filter(pk=id).update(pet_id=e_id,pet_name=name,gender=gender,age=age,adoption_fee=adoption_fee,dis=dis)
+        return redirect(shop_home)
+    return render(req,'shop/edit_pet.html',{'pets':pet})
+
+# def delete_pet(req,id):
+#     pet=Pet_category.objects.get(pk=id)
+#     url=pet.image.url
+#     url=url.split('/')[-1]
+#     os.remove('media/'+url)
+#     pet.delete()
+#     return redirect(shop_home)
+
 
 
 def dog_list(req,id):
@@ -91,6 +116,7 @@ def register(req):
         name=req.POST['name']
         email=req.POST['email']
         password=req.POST['password']
+        send_mail('Happy Tails registration', 'Happy Tails account created', settings.EMAIL_HOST_USER, [email])
         try:
             data=User.objects.create_user(first_name=name,email=email,password=password,username=email)
             data.save()
@@ -112,3 +138,4 @@ def user_home(req):
 def view_pet(req,id):
     pet=Pet_category.objects.get(pk=id)
     return render(req,'user/view_pet.html',{'pets':pet})
+
