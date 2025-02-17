@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <style>
+        /* Make the carousel height responsive */
+.carousel-item img {
+  width: 100%;
+  height: 60vh;
+  object-fit: cover;
+}
+
+@media (max-width: 767px) {
+  .carousel-item img {
+    height: 40vh;
+  }
+}
+
+.carousel-caption h3 {
+  font-size: 2rem;
+}
+
+.carousel-caption p {
+  font-size: 1.2rem;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon {
+  background-color: black;
+}
+
+@media (max-width: 992px) {
+  .card {
+    margin-bottom: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card-body {
+    padding: 15px;
+  }
+}
+
+/* Footer Styling */
+.footer {
+  background: linear-gradient(135deg, #6a0dad, #808080);
+  color: white;
+  padding: 40px 0;
+  text-align: center;
+}
+.footer a {
+  color: #dcdcdc;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+.footer a:hover {
+  color: #ffffff;
+}
+.footer .social-icons a {
+  margin: 0 10px;
+  font-size: 1.5rem;
+}
+.footer p {
+  margin-top: 10px;
+  font-size: 0.9rem;
+}
+
+    </style>
+</head>
+<body>
+  
+  <!-- navbar starting  -->
+  <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(200, 179, 200);">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="home">
+        <img src="static/images/happytailslogo.jpg" alt="Logo" style="width: 60px; height: 60px;" class="rounded-circle shadow">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link fw-light" href="shop_home">Home</a></li>
+          <li class="nav-item"><a class="nav-link fw-light" href="">Adopt a Pet</a></li>
+          <li class="nav-item"><a class="nav-link fw-light" href="login">Sign in</a></li>
+          <li class="nav-item"><a class="nav-link fw-light" href="shop_logout">Logout</a></li>
+          <li class="nav-item">
+            <form class="d-flex" action="/search" method="get">
+              <input class="form-control me-2 fw-light" type="search" placeholder="Search" name="query">
+              <button class="btn btn-outline-dark" type="submit">Search</button>
+            </form>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+    <ul class="navbar-nav">
+      <li class="nav-item"><a class="nav-link" href="#">Dogs & Puppies</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Cats & Kittens</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">Other type of Pets</a></li>
+    </ul>
+  </nav>
+
+  <div id="demo" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="static/images/bgimg1.jpg" alt="" class="d-block w-100">
+        <div class="carousel-caption d-none d-md-block">
+          <h3><b>FIND YOUR NEW BEST FRIEND</b></h3>
+          <p>Adopt a Pet, Make a Difference</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container mt-5">
+    <div class="row">
+        {% for pet in pets %}
+        <div class="col-lg-4">
+            <div class="card">
+              <a href="../dog_list/{{pet.id}}"><img class="card-img-top" src="{{pet.image.url}}" alt="Card image" style="width:100%;height: 320px;"></a>
+                <div class="card-body">
+                    <h4 class="card-title">{{pet.name}}</h4>
+                    <p class="card-text fw-light fw-secondary">{{pet.description}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+  </div>
+
+
+  <div id="demo" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="static/images/caroimg4.jpg" alt="" class="d-block w-100">
+        <div class="carousel-caption d-none d-md-block">
+          <h3 style="color: purple;"><b>SHELTERS ARE FULL!</b></h3>
+          <p style="color: purple;">Help Pets Get Out.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+  <div class="container mt-4">
+    <div class="row">
+        {% for pet in pets %}
+        <div class="col-lg-4">
+            <a href="view_product/{{pro.pk}}" style="text-decoration: none;">
+                <div class="card">
+                    <img class="card-img-top" src="{{pro.img.url}}" alt="Card image" style="width:100%;height: 400px;">
+                    <div class="card-body" style="height:140px;">
+                        <h4 class="card-title">{{pro.product_name}}</h4>
+                        <p class="card-text fw-light">{{pro.price}}</p>
+                        <p class="card-text"><b>{{pro.offer_price}}</b></p>
+                        <!-- <p class="card-text">{{pro.dis}}</p> -->
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+
+  <!-- Footer -->
+<footer class="footer mt-4">
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-section about">
+        <h2>About Us</h2>
+        <p>Happy Tails is dedicated to providing the best care for your furry friends. Join our community and stay updated on pet care tips, adoption stories, and more.</p>
+      </div>
+      
+      <div class="footer-section follow-us">
+        <h2>Follow Us</h2>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+      
+      <div class="footer-section contact">
+        <h2>Contact Us</h2>
+        <p>Email: contact@happytails.com</p>
+        <p>Phone: +1 234 567 890</p>
+      </div>
+    </div>
+    <hr>
+    <p>&copy; 2025 Happy Tails | All Rights Reserved</p>
+    <p><a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+  </div>
+</footer>
+
+
+</body>
+</html>

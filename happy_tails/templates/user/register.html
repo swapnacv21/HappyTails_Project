@@ -3,35 +3,91 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .reg_div {
+            background: #fff;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        .reg {
+            color: #764ba2;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            width: 100%;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+        }
+        input[type="submit"]:hover {
+            background: #764ba2;
+        }
+        @media (max-width: 576px) {
+    .reg_div {
+        width: 90%;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .reg_div {
+        width: 80%;
+    }
+}
+
+@media (max-width: 992px) {
+    .reg_div {
+        width: 60%;
+    }
+}
+    </style>
 </head>
 <body>
-    <div class="container d-flex justify-content-center align-items-center vh-100">
-        <div class="col-md-6 col-lg-4 p-4 shadow rounded bg-light">
-            <h2 class="text-center fw-light">Register</h2>
-            
-            <form action="" method="post" enctype="multipart/form-data">
-                {% csrf_token %}
-                
-                <div class="mb-3">
-                    <label for="name" class="form-label"><b>Name:</b></label>
-                    <input type="text" name="name" id="name" placeholder="Enter your name" class="form-control">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="email" class="form-label"><b>Email:</b></label>
-                    <input type="email" name="email" id="email" placeholder="Enter your email" class="form-control">
-                </div>
-                
-                <div class="mb-3">
-                    <label for="password" class="form-label"><b>Password:</b></label>
-                    <input type="password" name="password" id="password" placeholder="Enter your password" class="form-control">
-                </div>
-                
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
-            </form>
-        </div>
+    <div class="reg_div">
+        <h2 class="reg">Register</h2>
+        <form action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3 text-start">
+                <label class="form-label"><b>Name:</b></label>
+                <input type="text" name="name" placeholder="Enter your name" class="form-control">
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label"><b>Email:</b></label>
+                <input type="email" name="email" placeholder="Enter your email" class="form-control">
+            </div>
+            <div class="mb-3 text-start">
+                <label class="form-label"><b>Password:</b></label>
+                <input type="password" name="password" placeholder="Enter your password" class="form-control">
+            </div>
+            <input type="submit" value="Submit">
+        </form>
     </div>
-    
 </body>
 </html>

@@ -100,3 +100,15 @@ def register(req):
             return redirect(register)
     else:
         return render(req,'user/register.html')
+    
+
+def user_home(req):
+    # if 'user' in req.session:
+        pet=Pet_category.objects.all()
+        return render(req,'user/user_home.html',{'pets':pet})
+    # else:
+        # return redirect(shop_login)
+
+def view_pet(req,id):
+    pet=Pet_category.objects.get(pk=id)
+    return render(req,'user/view_pet.html',{'pets':pet})
