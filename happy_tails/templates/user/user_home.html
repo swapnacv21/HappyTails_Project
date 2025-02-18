@@ -138,7 +138,7 @@
   <div id="demo" class="carousel slide" data-bs-ride="carousel">
     <div class="carousel-inner">
       <div class="carousel-item active">
-        <img src="static/images/caroimg4.jpg" alt="" class="d-block w-100">
+        <img src="static/images/bgimg3.jpg" alt="" class="d-block w-100">
         <div class="carousel-caption d-none d-md-block">
           <h3 style="color: purple;"><b>SHELTERS ARE FULL!</b></h3>
           <p style="color: purple;">Help Pets Get Out.</p>
@@ -151,7 +151,7 @@
     <div class="row">
         {% for pet in pets %}
         <div class="col-lg-4">
-            <a href="view_product/{{pro.pk}}" style="text-decoration: none;">
+            <a href="view_pet/{{pet.pk}}" style="text-decoration: none;">
                 <div class="card">
                     <img class="card-img-top" src="{{pro.img.url}}" alt="Card image" style="width:100%;height: 400px;">
                     <div class="card-body" style="height:140px;">

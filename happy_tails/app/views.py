@@ -136,6 +136,6 @@ def user_home(req):
         # return redirect(shop_login)
 
 def view_pet(req,id):
-    pet=Pet_category.objects.get(pk=id)
+    pet=Pets.objects.get(pk=id)
     return render(req,'user/view_pet.html',{'pets':pet})
 
